@@ -1,0 +1,9 @@
+记录开发出现的问题：
+1.Autowired members must be defined in the valid spring bean(@Component/@Service,etc.) less... (Ctrl+F1) Checks autowiring problems in a bean class
+suppress all inspections for class
+
+
+2.java: 无法找到类型 'java.lang.annotation.Repeatable' 的注释方法 'value()': 找不到java.lang.annotation.Repeatable的类文件
+
+
+3.java.lang.IllegalStateException: Failed to load ApplicationContext
