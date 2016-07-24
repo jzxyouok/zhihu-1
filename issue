@@ -28,3 +28,10 @@ spring-boot-bindexception-address-already-in-use-bind
    2016-07-24 07:28:09.791  WARN 7072 --- [nio-8011-exec-1] o.a.v.t.v.servlet.ServletToolboxManager  : ServletToolboxManager has been deprecated. Please use org.apache.velocity.tools.ToolboxFactory instead.
 
  7.2016-07-24 13:05:37.977  WARN 6128 --- [nio-8011-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: "add"
+
+ 8.Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.liangsonghua.model.ViewObject] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+
+
+ 9.Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field
+
+ 字段映射时user_id=>userId
