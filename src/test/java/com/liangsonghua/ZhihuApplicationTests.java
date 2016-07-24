@@ -9,7 +9,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ZhihuApplication.class)
 @WebAppConfiguration
-public class zhihuApplicationTests {
+public class ZhihuApplicationTests {
 
 	@Test
 	public void contextLoads() {

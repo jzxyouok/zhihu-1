@@ -28,18 +28,22 @@ public class LoginController {
         @Autowired
         UserService userService;
 
-        @RequestMapping(path = {"/reg/"}, method = {RequestMethod.GET, RequestMethod.POST})
+        @RequestMapping(path = {"/reg/"}, method = { RequestMethod.POST})
         public String reg(Model model,@RequestParam("username") String username,
                                       @RequestParam("password") String password,
-                                      @RequestParam("next") String next,
+                                      @RequestParam(value = "next",required = false) String next,
+                                      @RequestParam(value = "rememberme",defaultValue = "false") boolean rememberme,
                                       HttpServletResponse response) {
                 try {
                         Map<String,String> map = userService.regirster(username,password);
                         if(map.containsKey("ticket")) {
-                                Cookie cookie = new Cookie("ticket",map.get("ticket"));
+                                Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
                                 cookie.setPath("/");
+                                if(rememberme) {
+                                   cookie.setMaxAge(3600*24*5);
+                                }
                                 response.addCookie(cookie);
-                                if(StringUtils.isBlank(next)){
+                                if(!StringUtils.isBlank(next)){
                                      return "redirect:"+next;
                                 }
 
@@ -57,16 +61,25 @@ public class LoginController {
 
         }
 
-         @RequestMapping(path = {"/login"}, method = {RequestMethod.GET, RequestMethod.POST})
+         @RequestMapping(path = {"/login/"}, method = {RequestMethod.POST})
         public String login( Model model, @RequestParam("username") String username,
                                    @RequestParam("password") String password,
+                                   @RequestParam(value = "next", required = false) String next,
+                                   @RequestParam(value = "rememberme",defaultValue = "false") boolean rememberme,
                                    HttpServletResponse response) {
                 try {
                       Map<String,String> map = userService.login(username,password);
                         if(map.containsKey("ticket")) {
-                                Cookie cookie = new Cookie("ticket",map.get("ticket"));
+                                Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
                                 cookie.setPath("/");
+                                if(rememberme) {
+                                        cookie.setMaxAge(3600*24*5);
+                                }
                                 response.addCookie(cookie);
+                                if(!StringUtils.isBlank(next)){
+                                       return "redirect:"+next;
+                                }
+
                                 return "redirect:/";
                         }
                         else {

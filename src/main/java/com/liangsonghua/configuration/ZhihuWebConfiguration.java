@@ -8,23 +8,21 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * Created by liangsonghua on 16-7-21.
- */
-@Component
+* Created by liangsonghua on 2016/7/21.
+*/
 //注册自定义拦截器
-public class ZhihuWebConfiguration extends WebMvcConfigurerAdapter{
-
+@Component
+public class ZhihuWebConfiguration extends WebMvcConfigurerAdapter {
         @Autowired
         PassportInterceptor passportInterceptor;
 
         @Autowired
-        LoginRequredInterceptor loginRequredInterceptor;
+        LoginRequredInterceptor loginRequiredInterceptor;
 
         @Override
         public void addInterceptors(InterceptorRegistry registry) {
                 registry.addInterceptor(passportInterceptor);
-                registry.addInterceptor(loginRequredInterceptor).addPathPatterns("/user/*");
+                registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/user/*");
                 super.addInterceptors(registry);
         }
-
 }

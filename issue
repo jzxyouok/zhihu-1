@@ -5,5 +5,26 @@ suppress all inspections for class
 
 2.java: 无法找到类型 'java.lang.annotation.Repeatable' 的注释方法 'value()': 找不到java.lang.annotation.Repeatable的类文件
 
+3.[  restartedMain] .b.l.ClasspathLoggingApplicationListener : Application failed to start with classpath
 
-3.java.lang.IllegalStateException: Failed to load ApplicationContext
+spring-boot-bindexception-address-already-in-use-bind
+
+
+ 4.Error creating bean with name 'zhihuWebConfiguration': Injection of autowired dependencies failed;
+ nested exception is org.springframework.beans.factory.BeanCreationException:
+ Could not autowire field: com.liangsonghua.interceptor.PassportInterceptor com.liangsonghua.
+ configuration.ZhihuWebConfiguration.passportInterceptor;
+ nested exception is org.springframework.beans.factory.
+ NoSuchBeanDefinitionException: No qualifying bean of type [com.liangsonghua.interceptor.PassportInterceptor] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+
+
+ 5.2016-07-23 20:27:22.914 ERROR 6688 --- [nio-8011-exec-3] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8011-exec-3] Exception processing template "index": Exception parsing document: template="index", line 11 - column 19
+   2016-07-23 20:27:22.916 ERROR 6688 --- [nio-8011-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Exception parsing document: template="index", line 11 - column 19] with root cause
+
+   org.xml.sax.SAXParseException: 元素类型 "input" 必须由匹配的结束标记 "</input>" 终止。
+
+ 6.2016-07-24 07:28:09.790  INFO 7072 --- [nio-8011-exec-1] o.a.v.t.v.servlet.ServletToolboxManager  : Using config file '/toolbox.xml'
+   2016-07-24 07:28:09.791  WARN 7072 --- [nio-8011-exec-1] o.a.v.tools.view.XMLToolboxManager       : XMLToolboxManager has been deprecated. Please use org.apache.velocity.tools.ToolboxFactory instead.
+   2016-07-24 07:28:09.791  WARN 7072 --- [nio-8011-exec-1] o.a.v.t.v.servlet.ServletToolboxManager  : ServletToolboxManager has been deprecated. Please use org.apache.velocity.tools.ToolboxFactory instead.
+
+ 7.2016-07-24 13:05:37.977  WARN 6128 --- [nio-8011-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: "add"
