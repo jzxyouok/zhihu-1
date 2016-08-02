@@ -2,6 +2,7 @@ package com.liangsonghua.controller;
 
 import com.liangsonghua.model.*;
 import com.liangsonghua.service.CommentService;
+import com.liangsonghua.service.LikeService;
 import com.liangsonghua.service.QuestionService;
 import com.liangsonghua.service.UserService;
 import com.liangsonghua.util.ZhihuUtil;
@@ -36,6 +37,9 @@ public class QuestionsController {
 
         @Autowired
         HostHolder hostHolder;
+
+        @Autowired
+        LikeService likeService;
 
 
         @RequestMapping(value = "/question/add",method = RequestMethod.POST)
@@ -72,8 +76,15 @@ public class QuestionsController {
                 List<ViewObject> vos = new ArrayList<ViewObject>();
                 for (Comment comment : commentList) {
                         ViewObject vo = new ViewObject();
+                        if(hostHolder.getUser()==null) {
+                                vo.set("liked",0);
+                        }
+                        else {
+                                vo.set("liked",likeService.getLikeStatus(hostHolder.getUser().getId(),EntityType.ENTITY_COMMENT,comment.getEntityId()));
+                        }
                         vo.set("comment", comment);
                         vo.set("user", userService.getUser(comment.getUserId()));
+                        vo.set("like",likeService.getLikeCount(EntityType.ENTITY_COMMENT,comment.getEntityId()));
                         vos.add(vo);
                 }
                 model.addAttribute("comments", vos);
