@@ -1,7 +1,12 @@
 package com.liangsonghua.controller;
 
+import com.liangsonghua.async.EventModel;
+import com.liangsonghua.async.EventProducer;
+import com.liangsonghua.async.EventType;
+import com.liangsonghua.model.Comment;
 import com.liangsonghua.model.EntityType;
 import com.liangsonghua.model.HostHolder;
+import com.liangsonghua.service.CommentService;
 import com.liangsonghua.service.LikeService;
 import com.liangsonghua.util.ZhihuUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +27,28 @@ public class LikeController {
         LikeService likeService;
 
         @Autowired
+        CommentService commentService;
+
+        @Autowired
         HostHolder hostHolder;
+
+        @Autowired
+        EventProducer eventProducer;
 
         @RequestMapping(value = {"/like"},method = RequestMethod.POST)
         public String like(@RequestParam("commentId") int commentId) {
                 if(hostHolder.getUser()==null) {
                         return ZhihuUtil.getJSONString(999);
                 }
+                Comment comment = commentService.gerCommentId(commentId);
+                eventProducer.fireEvent(new EventModel(EventType.LIKE).
+                        setActorId(hostHolder.getUser().getId()).
+                        setEntityId(commentId).
+                        setEntityType(EntityType.ENTITY_COMMENT).
+                        setExts("questionId",String.valueOf(comment.getEntityId())).
+                        setEntityOwnerId(comment.getUserId())
+                        );
+
                 long like = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT,commentId);
                 return ZhihuUtil.getJSONString(0,String.valueOf(like));
         }
@@ -38,6 +58,7 @@ public class LikeController {
                 if(hostHolder.getUser()==null) {
                         return ZhihuUtil.getJSONString(999);
                 }
+
                 long dislike = likeService.disLike(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT,commentId);
                 return ZhihuUtil.getJSONString(0,String.valueOf(dislike));
         }
