@@ -5,9 +5,11 @@ import com.liangsonghua.util.JedisAdapter;
 import com.liangsonghua.util.RedisKeyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import java.util.Map;
  * Created by liangsonghua on 16-8-3.
  */
 @Service
-public class EventConsumer implements InitializingBean {
+public class EventConsumer implements InitializingBean, ApplicationContextAware {
 
         private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
 
@@ -29,6 +31,8 @@ public class EventConsumer implements InitializingBean {
 
         @Autowired
         JedisAdapter jedisAdapter;
+
+
 
         @Override
         public void afterPropertiesSet() throws Exception {
@@ -67,5 +71,10 @@ public class EventConsumer implements InitializingBean {
                            }
                         }
                 });thread.start();
+        }
+
+        @Override
+        public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+               this.applicationContext = applicationContext;
         }
 }

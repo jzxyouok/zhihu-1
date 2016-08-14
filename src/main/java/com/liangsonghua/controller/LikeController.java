@@ -45,9 +45,9 @@ public class LikeController {
                         setActorId(hostHolder.getUser().getId()).
                         setEntityId(commentId).
                         setEntityType(EntityType.ENTITY_COMMENT).
-                        setExts("questionId",String.valueOf(comment.getEntityId())).
                         setEntityOwnerId(comment.getUserId())
-                        );
+                        .setExt("questionId", String.valueOf(comment.getEntityId()))
+                );
 
                 long like = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT,commentId);
                 return ZhihuUtil.getJSONString(0,String.valueOf(like));
