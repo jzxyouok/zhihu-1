@@ -159,10 +159,4 @@
         }
 
 在具体的事件中只要 implements EventHandler实现doHandle方法发送站内信即可
-> 效果图：
 
-![](http://i.imgur.com/xjIOxai.png)
-![](http://i.imgur.com/T24Zfjo.png)
-![](http://i.imgur.com/buYOnG0.png)
-![](http://i.imgur.com/3lR1BTL.png)
-![](http://i.imgur.com/FvXUSsH.png)
